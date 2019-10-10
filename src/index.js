@@ -14,11 +14,10 @@ jss.use(globalPlugin());
 jss.use(nestedPlugin());
 
 const sheet = jss.createStyleSheet(style).attach();
-console.log(sheet);
 
 ReactDOM.render(
   <HashRouter>
     <App jss={sheet} />
   </HashRouter>,
-  document.getElementById('root')
+  document.getElementById('root_node')
 );

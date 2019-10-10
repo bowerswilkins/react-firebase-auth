@@ -9,19 +9,8 @@ const theme = {
 
 const style = {
   '@global': {
-    "html, body": {
-      position: 'relative',
-      margin: 0,
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-    },
-    'html, body, #root': {
+    '#root_node': {
       height: '100%'
-    },
-    '#form': {
-      overflow: 'hidden'
-    },
-    code: {
-      fontFamily: 'source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace'
     },
     '.switch-wrapper': {
       position: 'relative'
@@ -64,7 +53,8 @@ const style = {
   field: {
     width: "100%",
     margin: "15px 0",
-    color: theme.color.black
+    color: theme.color.black,
+    background: 'none'
   },
   loginform: {
     display: 'inline-block',

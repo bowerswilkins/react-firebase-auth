@@ -29,7 +29,7 @@ const style = {
   },
   app: {
     height: '100%',
-    background: theme.color.black,
+    background: "white",
     '& .table': {
       display: 'table',
       height: '100%',
@@ -40,14 +40,14 @@ const style = {
       display: 'table-row',
       height: '100%'
     },
-    '& .content': {
+    '& .row': {
       display: 'table-cell',
       'vertical-align': 'middle'
     },
-    '& .logo': {
-      height: '25px',
-      margin: '1.5em auto',
-      display: 'block'
+    '& .content': {
+      padding: '3em 2em',
+      width: '400px',
+      margin: '0 auto'
     }
   },
   button: {
@@ -77,11 +77,6 @@ const style = {
   link: {
     marginTop: '1em',
     fontSize: '13px'
-  },
-  paper: {
-    padding: '3em 2em',
-    width: '400px',
-    margin: '0 auto'
   },
   spinner: {
     width: '8em',

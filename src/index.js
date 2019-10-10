@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import {create} from 'jss';
 import globalPlugin from 'jss-global';
@@ -17,8 +17,8 @@ const sheet = jss.createStyleSheet(style).attach();
 console.log(sheet);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <App jss={sheet} />
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root')
 );

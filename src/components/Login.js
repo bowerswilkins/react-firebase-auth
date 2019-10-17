@@ -92,14 +92,23 @@ class Login extends React.Component {
     let self = this;
     
     if (event) {
+
+      let Token;
+
       event.getIdToken(true).then(function(token) {
 
-        self.setState({user: event, loader: false, error: null, password: ""});
+        Token = token;
+        return Firebase.getUserMetadata(event.uid);
 
-        let url = window.location.origin + '/bowers/auth?token=' + token;
+      }).then(function(metadata) {
+        
+        self.setState({user: event, error: null, password: ""});
+
+        let url = `${window.location.origin}/bowers/auth?token=${Token}&first=${metadata.name.first}&last=${metadata.name.last}`;
 
         return window.location.replace(url);
       });
+
     } else {
       this.setState({user: event, loader: false, error: null, password: ""});
     }

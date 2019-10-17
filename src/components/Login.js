@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss';
+import {Redirect} from 'react-router-dom';
 
 import Link from './Link';
 import Firebase from './Firebase';
@@ -88,7 +89,20 @@ class Login extends React.Component {
   }
 
   handleAuthStateChange(event) {
-    this.setState({user: event, loader: false, error: null, password: ""});
+    let self = this;
+    
+    if (event) {
+      event.getIdToken(true).then(function(token) {
+
+        self.setState({user: event, loader: false, error: null, password: ""});
+
+        let url = window.location.origin + '/bowers/auth?token=' + token;
+
+        return window.location.replace(url);
+      });
+    } else {
+      this.setState({user: event, loader: false, error: null, password: ""});
+    }
   }
 
   loader() {
@@ -152,36 +166,19 @@ class Login extends React.Component {
     );
   }
 
-  success() {
-    const LoginButton = this.controls.button;
-    const LoginLink = this.controls.link;
-
-    return(
-      <div className={this.props.className}>
-        <section id="content">
-          <div>
-            <h1>You are logged on.</h1>
-            <LoginButton onClick={function(){window.logout();}}>Logout</LoginButton>
-          </div>
-        </section>
-        <section id="links">
-          <div>
-            <LoginLink href="/reset" style={{float:'left'}}>Change your password</LoginLink>
-          </div>
-        </section>
-      </div>
-    );
+  success(url) {
+    return (
+      <Redirect to={url} />
+    )
   }
 
   render() {
 
-    if (this.state.loader) return this.loader();
-
     if (!this.state.user) {
       return this.login();
-    } else {
-      return this.success();
     }
+    
+    return this.loader();
   }
 }
 

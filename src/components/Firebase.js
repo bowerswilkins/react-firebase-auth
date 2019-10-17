@@ -53,17 +53,27 @@ class Firebase {
 
   createUserMetadata = function(uid, data) {
     data.uid = uid;
-    return this.db.collection("users").add(data)
+    return this.db.collection("users").doc(uid).set(data)
       .catch(function(error) {
         throw error;
       });
   }
 
   getUserMetadata = function(uid) {
-    return this.db.collection("users").where("id", "==", uid)
-      .catch(function(error) {
-        throw error;
-      });
+    let ref =  this.db.collection("users").doc(uid);
+
+    return new Promise(function(done, error) {
+
+      if (!ref) error('Document ref not found!');
+
+      ref.get().then(function(doc) {
+        if (doc.exists) {
+          done(doc.data());
+        } else {
+          error("Document doesn't exist!");
+        }
+      })
+    });
   }
 
   updateUserMetadata = function(uid, data) {
